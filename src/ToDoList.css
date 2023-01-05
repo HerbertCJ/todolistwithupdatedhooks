@@ -1,5 +1,9 @@
 .main {    
     text-align: center;
+    border: 1px solid black;    
+    padding: 10px 10px 40px 10px;
+    margin: 30px auto;
+    background-color: aliceblue;
 }
 
 .list {
@@ -7,7 +11,18 @@
     display: flex;
     justify-content: center;
 }
+
 .list button {
     display: flex;
-    justify-content: space-between;    
+    justify-content: center;   
+    align-items: center;    
+    
+}
+
+.list button:hover, .main button {    
+    cursor: pointer;
+}
+
+.item {
+    margin-right: 10px;    
 }

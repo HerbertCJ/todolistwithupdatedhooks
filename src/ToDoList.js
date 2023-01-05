@@ -22,9 +22,6 @@ export default function ToDoList() {
         localStorage.setItem("list", json);        
     }, [list]);
 
-
-
-
     function handleSubmit(e) {
         e.preventDefault();
         let valid = validation(task)
@@ -99,11 +96,11 @@ export default function ToDoList() {
                                     onChange={(e) => setEditText(e.target.value)}
                                     value={editText} />)
                                 :
-                                (<div>{item.text}</div>)}
+                                (<div className="item">{item.text}</div>)}
                         </div>
 
                         <div>
-                            {taskEdit === item.id ? (<button onClick={() => editItem(item.id, editText)}>Submit Edit</button>) : (<button onClick={() => setTaskEdit(item.id)}>Edit</button>)}
+                            {taskEdit === item.id ? (<button onClick={() => editItem(item.id, editText)} className="submitedit">Submit Edit</button>) : (<button onClick={() => setTaskEdit(item.id)}>Edit</button>)}
                         </div>
 
                         <button onClick={() => handleDelete(index)}>Delete</button>
