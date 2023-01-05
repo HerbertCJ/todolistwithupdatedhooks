@@ -22,6 +22,11 @@ export default function Container() {
         setTask('')
     }
 
+    function handleDelete(index) {
+        let newList = [...list]
+        newList.splice(index, 1)
+        setList([...newList])
+    }
     return (
         <div className="main">
             <form action="#" onSubmit={handleSubmit}>
@@ -32,10 +37,12 @@ export default function Container() {
             </form>
             <div>
                 {list.map(
-                    (item) => (
+                    (item, index) => (
                         <div key={item.text}>
                             {item.text}
+                            <button onClick={() => handleDelete(index)}>Delete</button>
                         </div>
+                        
                     ))}
             </div>
         </div>
