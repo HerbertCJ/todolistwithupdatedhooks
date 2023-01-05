@@ -11,7 +11,9 @@ export default function Container() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault();        
+        let valid = validation(task)
+        if (valid === 1) return;
 
         let newTask = {
             id: new Date().getTime(),
@@ -27,6 +29,24 @@ export default function Container() {
         newList.splice(index, 1)
         setList([...newList])
     }
+
+    function validation(taskExist) {
+        if (taskExist.trim() === '') return 1;
+        let checkList = [...list]
+        let flag = 0;
+        checkList.map((item) => {
+            if (item.text === taskExist) {
+                flag = 1;
+            }
+            return 0;
+        })
+        if (flag === 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     return (
         <div className="main">
             <form action="#" onSubmit={handleSubmit}>
