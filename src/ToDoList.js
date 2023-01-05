@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './ToDoList.css'
 
-export default function Container() {
+export default function ToDoList() {
 
     const [list, setList] = useState([])
     const [task, setTask] = useState('')
@@ -10,21 +10,23 @@ export default function Container() {
     const [editText, setEditText] = useState('')
 
     useEffect(() => {
-        const temp = localStorage.getItem('list')
-        const loadedList = JSON.parse(temp)
-        
-        if(loadedList) {
-            setList(loadedList)
+        const json = localStorage.getItem("list");
+        const lodadedList = JSON.parse(json);      
+        if (lodadedList) {            
+            setList(lodadedList);
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
-        const temp = JSON.stringify(list)
-        localStorage.setItem('list', temp)
-    }, [list])
+        const json = JSON.stringify(list);
+        localStorage.setItem("list", json);        
+    }, [list]);
+
+
+
 
     function handleSubmit(e) {
-        e.preventDefault();        
+        e.preventDefault();
         let valid = validation(task)
         if (valid === 1) return;
 
@@ -35,7 +37,7 @@ export default function Container() {
         }
 
         setList([...list, newTask])
-        setTask('')      
+        setTask('')
     }
 
     function handleChange(e) {
@@ -48,7 +50,7 @@ export default function Container() {
         setList([...newList])
     }
 
-    function editItem(id, editText) {        
+    function editItem(id, editText) {
         let valid = validation(editText)
         if (valid === 1) return;
 
@@ -90,7 +92,7 @@ export default function Container() {
             </form>
             <div>
                 {list.map((item, index) => (
-                    <div key={item.id}>
+                    <div key={item.id} className="list">
                         <div>
                             {taskEdit === item.id ?
                                 (<input type="text"
@@ -99,7 +101,7 @@ export default function Container() {
                                 :
                                 (<div>{item.text}</div>)}
                         </div>
-                        
+
                         <div>
                             {taskEdit === item.id ? (<button onClick={() => editItem(item.id, editText)}>Submit Edit</button>) : (<button onClick={() => setTaskEdit(item.id)}>Edit</button>)}
                         </div>
